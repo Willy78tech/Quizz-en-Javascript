@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style1.css">
+    <script src="exercice1b.js" defer></script>
+    <title>TP2</title>
+</head>
+<body>
+    <header>
+      <button><a href="exercice2.html">Aller à l'exercice 2</a></button>
+    </header>
+    <form action="" id="commande" name="commande">
+        <h1>Formulaire de paiement</h1>
+        <p>Les champs obligatoires sont suivis par <strong><abbr title="required">*</abbr></strong>.</p>
+        <section>
+            <h2>Informations de contact</h2>
+            <p>
+              <label for="lastname">
+                <span>Nom :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="lastname" name="userlastname">
+              <span id="errornom"></span>
+            </p>
+            <p>
+              <label for="firstname">
+                <span>Prenom :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="firstname" name="userfirstname">
+              <span id="errorprenom"></span>
+            </p>
+            <p>
+              <label for="address">
+                <span>Adresse :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="address" name="useraddress">
+              <span id="erroradresse"></span>
+            </p>
+            <p>
+              <label for="code">
+                <span>Code Postal :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="code" name="usercode">
+              <span id="errorcodepostal"></span>
+            </p>
+            <p>
+              <label for="city">
+                <span>Ville :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="city" name="usercity">
+              <span id="errorville"></span>
+            </p>
+            <p>
+              <label for="country">
+                <span>Pays :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <select id="country" name="usercountry">
+                <option value="0">Choisir</option>
+                <option value="1">Canada</option>
+                <option value="2">Etats-Unis</option>
+              </select>
+              <span id="errorpays"></span>
+            </p>
+            <p>
+              <label for="date">
+                <span>Date de livraison :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="date" id="date" name="date">
+              <span id="errordate"></span>
+            </p>
+            <h2>Tarification</h2>
+            <p>
+              <label for="product">
+                <span>Nombre de Produit :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+                <input type="text" id="product" name="product">
+                <span id="errorproduit"></span>
+            </p>
+            <p>
+              <label for="prixHt">
+                <span>Prix hors taxe :</span>
+                <strong><abbr title="required">&nbsp;&nbsp;</abbr></strong>
+              </label>
+                <input type="text" id="prixHt" name="prixHt">
+            </p>
+            <p>
+              <label for="TPS">
+                <span>Montant TPS :</span>
+                <strong><abbr title="required">&nbsp;&nbsp;</abbr></strong>
+              </label>
+                <input type="text" id="TPS" name="TPS">
+            </p>
+            <p>
+              <label for="TVQ">
+                <span>Montant TVQ :</span>
+                <strong><abbr title="required">&nbsp;&nbsp;</abbr></strong>
+              </label>
+                <input type="text" id="TVQ" name="TVQ">
+            </p>
+            <p>
+              <label for="prixTTC">
+                <span>Prix taxes Comprises :</span>
+                <strong><abbr title="required">&nbsp;&nbsp;</abbr></strong>
+              </label>
+                <input type="text" id="prixTTC" name="prixTTC">
+            </p>
+        </section>
+        <section>
+            <h2>Informations de paiement</h2>
+            <p>
+              <span>Type de carte :</span>
+              <strong><abbr title="required">*</abbr></strong>
+              <input type="checkbox" id="Visa" name="Visa"> Visa
+              <input type="checkbox" id="Mastercard" name="Mastercard"> Mastercard 
+              <span id="errorcarte"></span> 
+            </p>
+            <p>
+              <label for="number">
+                <span>Numéro :</span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+                <input type="text" id="number" name="cardnumber">
+                <span id="errornumero"></span>    
+            </p>
+        </section>
+        <section>
+            <p> <button type="submit" value="valider">Valider le paiement</button> </p>
+        </section>
+        <div id="message"></div>
+    </form>
+</body>
+</html>
