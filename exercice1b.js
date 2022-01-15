@@ -83,14 +83,13 @@ function valider(e) {
     validerPays();
     validerCarte();
     validerProduit();
-    toggleCarte();
     e.preventDefault();
-    document.getElementById("message").textContent = "Merci pour votre Commande";  
+    document.getElementById("message").textContent = "Merci pour votre Commande";
     // Bloque l'envoi du formulaire si error 
-    if ((error) || (inputs.value.trim() === " ")){
+    if (error){
         e.preventDefault();
         document.getElementById("message").textContent = " ";
-    }        
+    }         
 }
 
 function validerNom() {
