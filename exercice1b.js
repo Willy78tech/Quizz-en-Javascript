@@ -8,14 +8,12 @@ let ville = document.getElementById('city');
 let livraison = document.getElementById('date');
 let pays = document.getElementById('country');
 let number = document.getElementById('number');
-let carteV = document.getElementById('Visa');
-let carteM = document.getElementById('Mastercard');
 let produit = document.getElementById('product');
 let produitHorsTaxe = document.getElementById('prixHt');
 let prixTPS = document.getElementById('TPS');
 let prixTVQ = document.getElementById('TVQ');
 let prixTTC = document.getElementById('prixTTC');
-let inputs = document.querySelectorAll('inputs');
+let carte = document.getElementById('carte');
 
 // On va écouter nos inputs à chaque événement au clavier et perte du focus
 nom.addEventListener('keyup', validerNom);
@@ -34,10 +32,6 @@ pays.addEventListener('keyup', validerPays);
 pays.addEventListener('blur', validerPays);
 produit.addEventListener('keyup', validerProduit);
 produit.addEventListener('blur', validerProduit);
-carteV.addEventListener('keyup', validerCarte);
-carteV.addEventListener('blur', validerCarte);
-carteM.addEventListener('keyup', validerCarte);
-carteM.addEventListener('blur', validerCarte);
 number.addEventListener('keyup', validerCarte);
 number.addEventListener('blur', validerCarte);
 
@@ -49,7 +43,6 @@ let errorCodePostal = document.getElementById('errorcodepostal');
 let errorVille = document.getElementById('errorville');
 let errorLivraison = document.getElementById('errordate');
 let errorProduit = document.getElementById('errorproduit');
-let errorCarte = document.getElementById('errorcarte');
 let errorPays = document.getElementById('errorpays');
 let errornumero = document.getElementById('errornumero');
 
@@ -59,19 +52,13 @@ let modeleProduit = /^[1-9][0-9]*$/;
 let modeleVisa = /^[4][9][9][0][0-9]{12}$/;
 let modeleMastercard = /^[5][2][5][8][0-9]{12}$/;
 
-// écouteur d'événement sur nos deux checkbox
-carteV.addEventListener("click", toggleCarte);
-carteM.addEventListener("click", toggleCarte);
+
 // écouteur d'événement sur notre formulaire de commande
 commande.addEventListener("submit", valider);
 
 let error = false;
 
-// Vérifie si la checkbox carte est cochée
-toggleCarte();
-
-function valider(e) {
-    
+function valider(e) { 
     error = false;
     viderErreur(); // Fait disparaître toutes les erreurs
     validerNom();
@@ -144,19 +131,20 @@ function validerPays(){
 }
 
 function validerCarte(){
-    errorCarte.innerHTML = " ";
-    if (carteV.checked) {
+    errornumero.innerHTML = " ";
+    if (number.value.trim() === ""){
+        error = true;
+        carte.innerHTML = " ";
+        errornumero.innerHTML = 'Ce champs est requis'; // message pour informer les utilisateurs
+    } else if ((modeleVisa.test(number.value) === false) && (modeleMastercard.test(number.value) === false)){
+        error = true;
+        errornumero.innerHTML = 'Cette carte n\'est pas valide'; // message pour informer les utilisateurs 
+    } else if (modeleMastercard.test(number.value) === true) {
         errornumero.innerHTML = " ";
-        if (number.value.trim() === " " || (modeleVisa.test(number.value) === false)) {
-            error = true;
-            errornumero.innerHTML = 'Cette carte n\'est pas une Visa'; // message pour informer les utilisateurs 
-        }
-    } else if (carteM.checked) {
+        carte.innerHTML = 'Mastercard'; 
+    } else if (modeleVisa.test(number.value) === true){
         errornumero.innerHTML = " ";
-        if (number.value.trim() === " " || (modeleMastercard.test(number.value) === false)) {
-            error = true;
-            errornumero.innerHTML = 'Cette carte n\'est pas une Mastercard'; // message pour informer les utilisateurs 
-        }
+        carte.innerHTML = 'Visa';
     }
 }
 
@@ -200,22 +188,11 @@ function viderErreur() {
     errorVille.innerHTML = " ";
     errorLivraison.innerHTML = " ";
     errorProduit.innerHTML = " ";
-    errorCarte.innerHTML = " ";
     errorPays.innerHTML = " ";
     errornumero.innerHTML = " ";
 }
-function toggleCarte(e) {
-    if (carteM.checked){
-      number.disabled = false;
-    } else if (carteV.checked){
-      number.disabled = false;
-    } else {
-        number.disabled = true;
-      errorCarte.innerHTML = "Veuillez sélectionner une Carte ";
-      e.preventDefault();
-    }
-  }
-  function validerLivraison() {
+
+function validerLivraison() {
     errorLivraison.innerHTML = " ";
     let d = new Date();
     let date = new Date(d.getFullYear(),d.getMonth(),d.getDate());

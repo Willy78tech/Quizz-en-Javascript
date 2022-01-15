@@ -94,3 +94,9 @@ label em {
 #errornom, #errorprenom, #errorcodepostal, #erroradresse, #errorville, #errordate, #errorpays, #errorcarte, #errorproduit, #errornumero {
     color: red;
 }
+#carte {
+    color: goldenrod;
+    font-weight: bold;
+    font-size: 40px;
+    font-style: oblique;
+}
