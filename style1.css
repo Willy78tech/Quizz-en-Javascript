@@ -42,7 +42,7 @@ input, textarea {
     width: 200px;
     box-sizing: border-box;
     border: 1px solid #999;
-    margin-left: 30px;
+    margin-left: 40px;
 }
 
 input[type=checkbox], input[type=radio] {

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style2.css">
+    <script src="exercice2.js" defer></script>
+    <title>TP2 </title>
+</head>
+<body>
+    <header>
+        <button class="lien"><a href="exercice1.html">Aller à l'exercice 1</a></button>
+    </header>
+    <main>
+        <div class="première">
+            <button id="resultat">Score: 0</button><br>
+            <button id="start">Démarrer</button>
+            <div id="quizz" class="hide">
+                <p id="chrono"></p>
+                <div class="carrousel" align="center">
+                    <div class="carrousel-container">
+                    <div id="item" class="carrousel-item">
+                        <img id="carImg" alt="" src="Images/0.jpg"><br>
+                        <span id="bonnerep"></span><br>
+                        <div id="capitale"></div>
+                    </div>
+                </div>
+                <input type="text" id="reponse" placeholder="capitale">
+                <button id="suivant">OK</button><br>
+                <div id="defilement">
+                    <button id="prev">Précédent</button>
+                    <button id="next">Suivant</button>
+                </div>
+            </div>   
+        </div>    
+    </main>
+</body>
+</html>
