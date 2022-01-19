@@ -8,34 +8,47 @@ let capitale = document.getElementById('capitale');
 let reponse = document.getElementById('reponse');
 let resultat = document.getElementById('resultat');
 let suivant = document.getElementById('suivant');
-let bonnerep = document.getElementById('bonnerep');
-let duréeChrono = 30;
+let compte = document.getElementById("compte");
+let durée = 30;
 let score = 0;
 
-// mise en place d'un timer
-let elem = document.getElementById('chrono');   
-let timerId = setInterval(compteRebours, 1000);
-function compteRebours() {
-  if (duréeChrono === -1) {
-    clearTimeout(timerId);
-    elem.innerHTML = ' Temps écoulé';
-  } else if (duréeChrono < 2){
-  elem.innerHTML = ' Temps restant : ' + duréeChrono + ' seconde'; // On écrit seconde au singulier en dessous de 2 secondes
-    duréeChrono--;
-  }else {
-  elem.innerHTML = ' Temps restant : ' + duréeChrono + ' secondes';
-    duréeChrono--;
-  }
-}
 // bouton pour lancer le quizz
 startBouton.addEventListener('click', startJeu);
 
 function startJeu() {
   startBouton.classList.add('hide') ;
+  document.getElementById('depart').classList.add('hide') ;
   questionnaire.classList.remove('hide') ;
+  document.getElementById('perdu').classList.add('hide');
   capitale.innerHTML = "Capitale : " + questions[compteur].question;
   resultat.innerHTML = "Score : " + score;
-  compteRebours(30) ;
+  reponse.innerHTML = questions[compteur].repUser;
+  if(durée === 0){
+    
+  }
+}
+
+// mise en place d'un timer
+
+let duréeInterval = setInterval(compter, 1000);
+
+function compter() {
+  durée--;
+  compte.innerHTML = compte.innerHTML = "Temps restant : " + durée;
+  if (durée === 0) {
+    clearInterval(duréeInterval);
+    compte.innerHTML = compte.innerHTML = "Temps écoulé ";
+    document.getElementById('perdu').style.backgroundColor = "red";
+    document.getElementById('perdu').classList.remove('hide');
+    resultat.classList.add('hide') ;
+    suivant.classList.add('hide') ;
+    reponse.classList.add('hide') ;
+  } else if (score === 5){
+    clearInterval(duréeInterval);
+    document.getElementById('bravo').classList.remove('hide');
+    document.getElementById('bravo').innerHTML = 'Bravo ! Votre temps est de : ' + (durée - duréeInterval) + ' secondes';
+    resultat.classList.add('hide') ;
+  }
 }
 
 // écouteur d'événement sur envoi de notre réponse au clic ou sur la touche entrée
@@ -49,38 +62,43 @@ reponse.addEventListener("keydown", function (e) {
 });
 
 function valider() {
-  for(let i = 0; i < questions.length; i++) {
-     if(reponse.value.toLowerCase() === questions[i].réponse){
-       score += 1;
-       resultat.innerHTML = "Score: " + score;// chaque bonne réponse est comptabilisée
-     } else {
-       bonnerep.innerHTML = " ";
-     }
-   }
+  for(let i = 0 ; i < questions.length; i++) {
+    if(reponse.value.toLowerCase() === questions[i].réponse){
+      score += 1;
+      resultat.innerHTML = "Score: " + score;// chaque bonne réponse est comptabilisée
+      reponse.innerHTML = questions[i].repUser;
+    }else{
+      reponse.innerHTML = reponse.placeholder;
+    }
+  } 
 }
-
 
 // Tableau du questionnaire sur les capitales
 let questions = [
     {
     question: "Canada",
-    réponse: "ottawa"
+    réponse: "ottawa",
+    repUser : "ottawa"
 },
 {
     question: "Niger",
-    réponse: "niamey"  
+    réponse: "niamey",
+    repUser : "niamey"  
 },
 {
     question: "Suisse",
-    réponse: "bern"
+    réponse: "bern",
+    repUser : "bern"
 },
 {
     question: "Japon",
-    réponse: "tokyo"
+    réponse: "tokyo",
+    repUser : "tokyo"
 },
 {
     question: "Bolivie",
-    réponse: "sucre"
+    réponse: "sucre",
+    repUser : "sucre"
 },
 ];
 
@@ -106,7 +124,8 @@ function nextItem() {
 }
 function displayImg() {
   capitale.innerHTML = "Capitale : " + questions[compteur].question;
-  carImg.src = "Images/" + compteur + ".jpg";  
+  carImg.src = "Images/" + compteur + ".jpg";
+  document.getElementById('reponse').focus() + compteur;
 }
 
 

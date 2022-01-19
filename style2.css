@@ -1,4 +1,9 @@
-        
+body{
+    background-color: darkcyan;
+}
+.première {
+    text-align: center;
+}        
 img {
     width: 80%;
     height: auto;
@@ -30,8 +35,18 @@ a {
     margin-top: 5px;
     border-radius: 15px;
 }
-#resultat {
+#resultat, #perdu, #depart {
     background-color: purple;
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+    width: 400px;
+    margin-top: 2px;
+    border-radius: 15px;
+}
+
+#bravo {
+    background-color: green;
     color: white;
     font-weight: bold;
     font-size: larger;
@@ -46,6 +61,12 @@ a {
     display: none;
 }
 
-#chrono {
-    color: red;
-}
+.durée{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color:red;
+    background-color: black;
+    width: 200px;
+  }
+
