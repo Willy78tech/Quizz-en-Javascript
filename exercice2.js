@@ -1,3 +1,4 @@
+"use strict";
 // élément du DOM
 let prev = document.querySelector('#prev');
 let next = document.querySelector('#next');
@@ -9,8 +10,9 @@ let reponse = document.getElementById('reponse');
 let resultat = document.getElementById('resultat');
 let suivant = document.getElementById('suivant');
 let compte = document.getElementById("compte");
-let durée = 30;
+let durée = 31;
 let score = 0;
+let duréeInterval;
 
 // bouton pour lancer le quizz
 startBouton.addEventListener('click', startJeu);
@@ -20,17 +22,11 @@ function startJeu() {
   document.getElementById('depart').classList.add('hide') ;
   questionnaire.classList.remove('hide') ;
   document.getElementById('perdu').classList.add('hide');
-  capitale.innerHTML = "Capitale : " + questions[compteur].question;
+  capitale.innerHTML = "Capitale : " + questions[compteur].pays;
   resultat.innerHTML = "Score : " + score;
-  reponse.innerHTML = questions[compteur].repUser;
-  if(durée === 0){
-    
-  }
+  duréeInterval = setInterval(compter, 1000);
 }
-
 // mise en place d'un timer
-
-let duréeInterval = setInterval(compter, 1000);
 
 function compter() {
   durée--;
@@ -46,7 +42,7 @@ function compter() {
   } else if (score === 5){
     clearInterval(duréeInterval);
     document.getElementById('bravo').classList.remove('hide');
-    document.getElementById('bravo').innerHTML = 'Bravo ! Votre temps est de : ' + (durée - duréeInterval) + ' secondes';
+    document.getElementById('bravo').innerHTML = 'Bravo !' + '<br>' +'Votre temps est de : ' + (30 - durée) + ' secondes';
     resultat.classList.add('hide') ;
   }
 }
@@ -61,44 +57,51 @@ reponse.addEventListener("keydown", function (e) {
   }
 });
 
+// fonction qui permet d'incrémenter le score
 function valider() {
-  for(let i = 0 ; i < questions.length; i++) {
-    if(reponse.value.toLowerCase() === questions[i].réponse){
-      score += 1;
-      resultat.innerHTML = "Score: " + score;// chaque bonne réponse est comptabilisée
-      reponse.innerHTML = questions[i].repUser;
-    }else{
-      reponse.innerHTML = reponse.placeholder;
-    }
+  if(reponse.value.toLowerCase() === questions[compteur].capitale){
+    score += 1;
+    resultat.innerHTML = "Score: " + score;// chaque bonne réponse est comptabilisée
+    questions[compteur].bonnereponse = true;
+  }
+    reponse.value = "";
   } 
-}
+
+  // fonction qui permet de remplir le champs input de chaque diaporama
+function correct (){
+  if (questions[compteur].bonnereponse) {
+    reponse.value = questions[compteur].capitale;
+  } else {
+    reponse.value = "";
+  }
+}  
 
 // Tableau du questionnaire sur les capitales
 let questions = [
     {
-    question: "Canada",
-    réponse: "ottawa",
-    repUser : "ottawa"
+    pays: "Canada",
+    capitale: "ottawa",
+    bonnereponse: false
 },
 {
-    question: "Niger",
-    réponse: "niamey",
-    repUser : "niamey"  
+    pays: "Niger",
+    capitale: "niamey",
+    bonnereponse: false  
 },
 {
-    question: "Suisse",
-    réponse: "bern",
-    repUser : "bern"
+    pays: "Suisse",
+    capitale: "bern",
+    bonnereponse: false
 },
 {
-    question: "Japon",
-    réponse: "tokyo",
-    repUser : "tokyo"
+    pays: "Japon",
+    capitale: "tokyo",
+    bonnereponse: false
 },
 {
-    question: "Bolivie",
-    réponse: "sucre",
-    repUser : "sucre"
+    pays: "Bolivie",
+    capitale: "sucre",
+    bonnereponse: false
 },
 ];
 
@@ -114,6 +117,7 @@ function prevItem() {
     compteur = 4;
   } 
   displayImg();
+  correct ();
 }
 function nextItem() {
   compteur++;
@@ -121,11 +125,10 @@ function nextItem() {
     compteur = 0;
   } 
   displayImg();
+  correct(); 
 }
 function displayImg() {
-  capitale.innerHTML = "Capitale : " + questions[compteur].question;
+  capitale.innerHTML = "Capitale : " + questions[compteur].pays;
   carImg.src = "Images/" + compteur + ".jpg";
-  document.getElementById('reponse').focus() + compteur;
+  document.getElementById('reponse').focus() + compteur; 
 }
-
-

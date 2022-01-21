@@ -70,3 +70,21 @@ a {
     width: 200px;
   }
 
+.quizz{
+    position: relative;
+}
+
+#next, #prev{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    font-size: 1em;
+}
+
+#next{
+    right: 50px;
+}
+#prev{
+    left: 30px;
+}
