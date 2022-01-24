@@ -1,3 +1,4 @@
+"use strict";
 // On va chercher chaque Id des inputs du DOM qui nous intéressent
 let commande = document.getElementById("commande");
 let nom = document.getElementById('lastname');
@@ -59,7 +60,12 @@ commande.addEventListener("submit", valider);
 let error = false;
 
 function valider(e) { 
-    error = false;
+    error;
+    // Bloque l'envoi du formulaire si error 
+    if (error = true) {
+        e.preventDefault();
+        document.getElementById("message").textContent = "Veuillez remplir le formulaire ";
+    } 
     viderErreur(); // Fait disparaître toutes les erreurs
     validerNom();
     validerPrenom();
@@ -71,12 +77,7 @@ function valider(e) {
     validerCarte();
     validerProduit();
     e.preventDefault();
-    document.getElementById("message").textContent = "Merci pour votre Commande";
-    // Bloque l'envoi du formulaire si error 
-    if (error){
-        e.preventDefault();
-        document.getElementById("message").textContent = " ";
-    }         
+    document.getElementById("message").textContent = "Merci pour votre Commande";        
 }
 
 function validerNom() {
@@ -138,7 +139,7 @@ function validerCarte(){
         errornumero.innerHTML = 'Ce champs est requis'; // message pour informer les utilisateurs
     } else if ((modeleVisa.test(number.value) === false) && (modeleMastercard.test(number.value) === false)){
         error = true;
-        errornumero.innerHTML = 'Cette carte n\'est pas valide'; // message pour informer les utilisateurs 
+        errornumero.innerHTML = 'Cette carte n\'est pas valide'; // message pour informer les utilisateurs que c'est bien une visa ou une mastercard
     } else if (modeleMastercard.test(number.value) === true) {
         errornumero.innerHTML = " ";
         carte.innerHTML = 'Mastercard'; 
@@ -152,10 +153,10 @@ function validerProduit(){
     errorProduit.innerHTML = " ";
     if (produit.value.trim() === ""){
         error = true;
-        prixTPS.value = " ";
-        prixTVQ.value = " ";
-        prixTTC.value = " ";
-        produitHorsTaxe.value = " ";
+        prixTPS.value = "";
+        prixTVQ.value = "";
+        prixTTC.value = "";
+        produitHorsTaxe.value = "";
         errorProduit.innerHTML = 'Ce champs est requis'; // message pour informer les utilisateurs
         e.preventDefault();
     } else if(modeleProduit.test(produit.value) === false){

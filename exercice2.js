@@ -14,7 +14,7 @@ let durée = 31;
 let score = 0;
 let duréeInterval;
 
-// bouton pour lancer le quizz
+// fonction bouton pour lancer le quizz
 startBouton.addEventListener('click', startJeu);
 
 function startJeu() {
@@ -30,7 +30,7 @@ function startJeu() {
 
 function compter() {
   durée--;
-  compte.innerHTML = compte.innerHTML = "Temps restant : " + durée;
+  compte.innerHTML = "Temps restant : " + durée;
   if (durée === 0) {
     clearInterval(duréeInterval);
     compte.innerHTML = compte.innerHTML = "Temps écoulé ";
